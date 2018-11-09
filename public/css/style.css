@@ -1,0 +1,81 @@
+body{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    height: 100vh;
+    margin: 0px;
+    font-family: 'roboto', sans-serif; 
+}
+
+header{
+    height: 100px;
+    width: 100%;
+    background-image: linear-gradient(to right, #9A0D5F, #682F8C); 
+    font-family: 'roboto', sans-serif;
+    font-size: 35pt;
+    font-weight: 100;
+    margin-top: 0;
+    color: white;
+    margin-bottom: 20px;
+    grid-row: span 1;
+    grid-column: span 1;
+}
+
+h1{
+    padding-top: 20px;
+    padding-left: 15px;
+}
+
+main{
+    margin-top: 25px;
+    text-align: center;
+    padding: 10px;
+}
+
+#addform{
+    padding-bottom: 25px;
+    border-bottom: 2px solid #F5F5F5;
+    border-width: 75%;
+}
+
+#input{
+    width: 300px;
+    height: 22px;
+    border-radius: 5px;
+    border: 1px solid #9A0D5F;
+    background-color: #F5F5F5;
+}
+
+#addbutton, .delete {
+    color: #445894;
+    border: hidden;
+    background-color: rgba(0,0,0,0);
+}
+
+#list{
+    display: grid;
+    text-align: center;
+}
+
+ul li {
+    border-radius: 5px;
+    padding: 5px;
+    display: grid;
+    width: 350px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 10% 75% 10%; 
+    text-align: left;
+    margin: 10px auto;
+    background-color: #F5F5F5;
+}
+
+
+
+@media only screen and (min-width: 600px){
+
+    main {
+        border: 15px solid linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);
+    }
+
+}
+
