@@ -2,7 +2,7 @@ $(function () {
 
     const state = {
         todoList: [],
-        baseUrl: 'https://devin-todolist.herokuapp.com'
+        baseUrl: 'https://devin-todosocket.herokuapp.com/'
     };
 
     const render = function () {
@@ -51,7 +51,6 @@ $(function () {
 
 
     $('#list').on('click', '.delete', function () {
-        //Extracting _id from the id
         let ID = $(this).attr('id');
         ID = ID.slice(0, ID.length - 1);
 
@@ -68,7 +67,6 @@ $(function () {
 
 
     $('#list').on('click', '.check', function () {
-        //Extracting label from the id
         let ID = $(this).attr('id');
         ID = ID.slice(1, ID.length);
 
