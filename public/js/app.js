@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var $newItemInput = $("input.new-item");
     var $todoContainer = $(".todo-container");
+    var $dateRow = $(".date-row");
     $(document).on("click", "button.delete", deleteTodo);
     $(document).on("click", "button.complete", toggleComplete);
     $(document).on("click", ".todo-item", editTodo);
@@ -11,6 +12,12 @@ $(document).ready(function () {
     var todos = [];
 
     getTodos();
+    showDate();
+
+    function showDate() {
+        var date = moment().format("ddd MMM Do YY");
+        $dateRow.prepend(date);
+    }
 
     function initializeRows() {
         $todoContainer.empty();
