@@ -10,6 +10,7 @@ $(document).ready(function () {
     $(document).on("submit", "#todo-form", insertTodo);
 
     var todos = [];
+    var socket = io();
 
     getTodos();
     showDate();
@@ -117,6 +118,12 @@ $(document).ready(function () {
         };
 
         $.post("/api/todos", todo, getTodos);
+        socket.emit('new-todo', {todo : todo});
         $newItemInput.val("");
     }
+
+    socket.on('emit-todo', function(data){
+        console.log(data);
+    });
+
 });

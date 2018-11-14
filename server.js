@@ -1,6 +1,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mysql = require('mysql2');
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 var app = express();
 var PORT = process.env.PORT || 8080;
 
@@ -12,6 +14,8 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
+
+require('./sockets/todo-sockets')(io);
 
 var db = require("./models");
 
