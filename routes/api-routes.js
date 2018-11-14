@@ -1,47 +1,53 @@
-//Exporting our routes
-module.exports = function(info){
+var db = require("../models");
 
-    info.app.get('/api/data', function(req, res) {
-        info.db.collection(info.COLLECTION).find({}).toArray(function(err, docs) {
-            if (err) {
-                console.log(res + '==>' + err.message, "Failed to get contacts.");
-            } else {
-                return res.send(docs);
-            }
-        });
+module.exports = function (app) {
+
+    app.get("/api/todos", function (req, res) {
+        db.Todo.findAll({}).then(function (dbTodo) {
+            res.json(dbTodo);
+        }).catch(function(err){
+            res.json(err)
+        })
     });
 
-    info.app.post('/api/data', function(req, res) {
-        if (!(req.body.item.label || req.body.item.checked)) {
-            console.log(res, "Invalid user input", "Must provide a label and checked state.", 400);
-        }
+    app.post("/api/todos", function (req, res) {
 
-        info.db.collection(info.COLLECTION).insertOne(req.body.item, function(err, doc) {
-            if (err) {
-                console.log(res + '==>' + err.message, "Failed to create new item.");
-            } else {
-                return res.send(true);
-            }
-        });
+        db.Todo.create({
+            text: req.body.text,
+            complete: req.body.complete
+        }).then(function (dbTodo) {
+            res.json(dbTodo)
+        }).catch(function(err){
+            res.json(err)
+        })
     });
 
-    info.app.delete('/api/data', function (req, res) {
-        info.db.collection(info.COLLECTION).deleteOne({_id: new info.ObjectID(req.body._id)}, function(err, result) {
-            if (err) {
-                console.log(res + '==>' + err.message, "Failed to delete contact");
-            } else {
-                return res.send(true);
-            }
-        });
+    app.delete("/api/todos/:id", function (req, res) {
+        db.Todo.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(function (dbTodo) {
+                res.json(dbTodo);
+            }).catch(function(err){
+                res.json(err)
+            })
     });
 
-    info.app.put('/api/data', function (req, res) {
-        info.db.collection(info.COLLECTION).updateOne({_id: new info.ObjectID(req.body._id)}, {$set: {checked: req.body.checked}}, function(err, doc) {
-            if (err) {
-                console.log(res + '==>' + err.message, "Failed to update contact");
-            } else {
-                return res.send(true);
-            }
-        });
+    app.put("/api/todos", function (req, res) {
+        db.Todo.update({
+                text: req.body.text,
+                complete: req.body.complete
+            }, {
+                where: {
+                    id: req.body.id
+                }
+            })
+            .then(function (dbTodo) {
+                res.json(dbTodo);
+            }).catch(function(err){
+                res.json(err)
+            })
     });
 };
