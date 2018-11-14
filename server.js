@@ -1,7 +1,17 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var mysql = require('mysql');
 var app = express();
 var PORT = process.env.PORT || 8080;
+
+var connection = mysql.createConnection({
+    host: 'us-cdbr-iron-east-01.cleardb.net',
+    user: 'be6307df739dcd',
+    password: 'a9e77912',
+    database: 'heroku_98b265965429210'
+});
+
+connection.connect();
 
 var db = require("./models");
 
