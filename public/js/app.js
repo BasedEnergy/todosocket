@@ -10,13 +10,13 @@ $(document).ready(function () {
     $(document).on("submit", "#todo-form", insertTodo);
 
     var todos = [];
-    var socket = io();
+    const socket = `${io()}`;
 
     getTodos();
     showDate();
 
     function showDate() {
-        var date = moment().format("ddd MMM Do YY");
+        var date = moment().format("dd MMM Do YY");
         $dateRow.prepend(date);
     }
 
