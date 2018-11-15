@@ -9,8 +9,8 @@ module.exports = function(io){
         })
 
         socket.on('todo-change', function(newData) {
-            console.log(newData);
-            io.emit('emit-todo', newData);
+            console.log(data);
+            io.emit('emit-todo', data);
         })
         socket.on('remove-todo', function(data){
             console.log(data);
