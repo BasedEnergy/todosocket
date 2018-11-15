@@ -10,7 +10,7 @@ $(document).ready(function () {
     $(document).on("submit", "#todo-form", insertTodo);
 
     var todos = [];
-    var socket = io().connect('http://localhost:8080');
+    var socket = io.connect('http://localhost:8080');
 
     getTodos();
     showDate();
@@ -43,6 +43,7 @@ $(document).ready(function () {
             method: "DELETE",
             url: "/api/todos/" + id
         }).then(getTodos);
+        socket.emit('remove-todo', {todo : todo});
     }
 
     function editTodo() {
@@ -75,6 +76,7 @@ $(document).ready(function () {
             url: "/api/todos",
             data: todo
         }).then(getTodos);
+        socket.emit('todo-change', {todo : todo});
     }
 
     function cancelEdit() {
