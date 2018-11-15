@@ -8,7 +8,7 @@ module.exports = function(io){
             io.emit('emit-todo', data);
         })
 
-        socket.on('todo-change', function(newData) {
+        socket.on('todo-change', function(data) {
             console.log(data);
             io.emit('emit-todo', data);
         })
