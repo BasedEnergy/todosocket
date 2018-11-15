@@ -1,1 +1,27 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
 
+body{
+    background-color: #f0efe9;
+    color: #5e6170;
+}
+
+#todo-container{
+    margin: auto;
+    margin-top: 24px; 
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+.todo-list{
+    background-color: #ffffff; 
+}
+
+.todo-item{
+    border: none;
+}

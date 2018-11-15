@@ -10,7 +10,7 @@ $(document).ready(function () {
     $(document).on("submit", "#todo-form", insertTodo);
 
     var todos = [];
-    const socket = `${io()}`;
+    var socket = io.connect('http://localhost:8080');
 
     getTodos();
     showDate();
