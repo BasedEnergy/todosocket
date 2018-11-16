@@ -38,3 +38,8 @@ body{
     margin-top: 15px;
     border: none;
 }
+
+.btn {
+    background: none;
+    border: none;
+}

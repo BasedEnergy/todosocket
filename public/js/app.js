@@ -10,7 +10,7 @@ $(document).ready(function () {
     $(document).on("submit", "#todo-form", insertTodo);
 
     var todos = [];
-    var socket = io.connect('http://localhost:8080');
+    var socket = io();
 
     getTodos();
     showDate();
@@ -42,8 +42,9 @@ $(document).ready(function () {
         $.ajax({
             method: "DELETE",
             url: "/api/todos/" + id
-        }).then(getTodos);
-        socket.emit('remove-todo', {todo : todo});
+        }).then(function(){
+            socket.emit('new-change');
+        })
     }
 
     function editTodo() {
@@ -75,8 +76,10 @@ $(document).ready(function () {
             method: "PUT",
             url: "/api/todos",
             data: todo
-        }).then(getTodos);
-        socket.emit('todo-change', {todo : todo});
+        }).then(function(){
+            socket.emit('new-change');
+        })
+        
     }
 
     function cancelEdit() {
@@ -97,8 +100,8 @@ $(document).ready(function () {
                 todo.text,
                 "</span>",
                 "<input type='text' class='edit' style='display: none;'>",
-                "<button class='delete btn btn-danger'>x</button>",
-                "<button class='complete btn btn-primary'>✓</button>",
+                "<button class='delete btn btn-danger'><i class='far fa-times-circle'></i></button>",
+                "<button class='complete btn btn-primary'><i class='far fa-check-circle'></i></button>",
                 "</li>"
             ].join("")
         );
@@ -119,13 +122,16 @@ $(document).ready(function () {
             complete: false
         };
 
-        $.post("/api/todos", todo, getTodos);
-        socket.emit('new-todo', {todo : todo});
+        $.post("/api/todos", todo, getTodos)
+        .then(function(){
+            socket.emit('new-change');    
+        })
+        
         $newItemInput.val("");
     }
 
-    socket.on('emit-todo', function(data){
-        console.log(data);
+    socket.on('emit-change', function(){
+        getTodos();
     });
 
 });

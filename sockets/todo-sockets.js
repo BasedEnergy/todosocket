@@ -1,21 +1,11 @@
 const db = require('../models/index');
+const todo = {};
 
 module.exports = function(io){
-    io.on('connection', function(socket){
-
-        socket.on('new-todo', function(data){
+    io.on('connection',function(socket){
+        socket.on('new-change',function(data){
+            io.emit('emit-change');
             console.log(data);
-            io.emit('emit-todo', data);
         })
-
-        socket.on('todo-change', function(data) {
-            console.log(data);
-            io.emit('emit-todo', data);
-        })
-        socket.on('remove-todo', function(data){
-            console.log(data);
-            io.emit('emit-todo', data);
-        })
-
-    });
+    })
 }
